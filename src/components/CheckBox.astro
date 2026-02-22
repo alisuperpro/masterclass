@@ -1,0 +1,22 @@
+---
+interface Props {
+  id: string
+  label: string
+  required?: boolean
+  name: string
+  value: string
+}
+const { id, label, required, name, value } = Astro.props
+---
+
+<div class="flex flex-row gap-x-2">
+  <input
+    id={id}
+    type="radio"
+    required={required}
+    class="bg-white rounded-md p-2"
+    name={name}
+    value={value}
+  />
+  <label for={id} class="">{label}</label>
+</div>
