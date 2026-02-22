@@ -14,12 +14,12 @@ export const POST: APIRoute = async ({ request }) => {
   const findUs = data.get("find-us")
   const underAge = data.get("under-age")
   const disability = data.get("disability")
-  const work = data.get("work")
-  const university = data.get("university")
+  const work = data.get("work") ?? ""
+  const university = data.get("university") ?? ""
   const experience = data.get("experience")
   const ref = data.get("ref")
-  const otherWork = data.get("other-work-input-text")
-  const otherUniversity = data.get("other-university-input-text")
+  const otherWork = data.get("other-work-input-text") ?? ""
+  const otherUniversity = data.get("other-university-input-text") ?? ""
   const payImg = data.get("pay") as File
 
   if (
@@ -50,28 +50,10 @@ export const POST: APIRoute = async ({ request }) => {
 
   const rename = `${id}.${splitted}`
 
-  /* console.log({
-    name,
-    dni,
-    email,
-    phone,
-    igUsername,
-    findUs,
-    underAge,
-    disability,
-    work,
-    university,
-    experience,
-    ref,
-    otherWork,
-    otherUniversity,
-    payImg,
-  }) */
-
   try {
-    await turso.execute({
-      sql: "INSERT INTO participants (id, name, dni, email,phone, ig_username, find_us, under_age, disability, work, university, experience, pay_ref, pay_img) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
-      args: [
+    await turso.execute(
+      "INSERT INTO participants (id, name, dni, email,phone, ig_username, find_us, under_age, disability, work, university, experience, pay_ref, pay_img) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+      [
         id.toString(),
         name?.toString(),
         dni?.toString(),
@@ -81,15 +63,15 @@ export const POST: APIRoute = async ({ request }) => {
         findUs?.toString(),
         underAge?.toString(),
         disability?.toString(),
-        work?.toString() === "Otro" ? otherWork?.toString() : work?.toString(),
-        university?.toString() === "Otro"
+        work === "Otro" ? otherWork.toString() : work.toString(),
+        university === "Otro"
           ? otherUniversity?.toString()
           : university?.toString(),
         experience?.toString(),
         ref?.toString(),
         rename,
       ],
-    })
+    )
 
     const blob = await put(`pays/${rename}`, payImg, {
       access: "private",

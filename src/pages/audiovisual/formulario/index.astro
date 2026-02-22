@@ -361,7 +361,7 @@ const experience = [
         </div>
 
         <button
-          class="mx-auto bg-blue-500 text-white font-semibold px-4 py-2 rounded-md cursor-pointer"
+          class="mx-auto bg-blue-500 text-white font-semibold px-4 py-2 rounded-md cursor-pointer disabled:bg-blue-300 disabled:cursor-not-allowed"
           type="submit">Enviar</button
         >
 
@@ -374,18 +374,20 @@ const experience = [
 <script>
   const $buttonSubmit = document.querySelector("form")
 
-  clickOtherRadioButton({
-    document: document,
-    query: "input[name='work']",
-    otherId: "#other-work-input-text",
-    wrapperId: "#other-work-input-wrapper",
-  })
+  document.addEventListener("DOMContentLoaded", () => {
+    clickOtherRadioButton({
+      document: document,
+      query: "input[name='work']",
+      otherId: "#other-work-input",
+      wrapperId: "#other-work-input-wrapper",
+    })
 
-  clickOtherRadioButton({
-    document: document,
-    query: "input[name='university']",
-    otherId: "#other-university-input-text",
-    wrapperId: "#other-university-input-wrapper",
+    clickOtherRadioButton({
+      document: document,
+      query: "input[name='university']",
+      otherId: "#other-university-input",
+      wrapperId: "#other-university-input-wrapper",
+    })
   })
 
   $buttonSubmit?.addEventListener("submit", async (ev) => {
@@ -397,6 +399,10 @@ const experience = [
       body: formData,
     })
     const data = await response.json()
+
+    if (response.ok) {
+      location.href = "/audiovisual/gracias"
+    }
 
     $buttonSubmit.removeAttribute("disabled")
   })
@@ -418,9 +424,9 @@ const experience = [
 
     $radioOtherInput.forEach((el) => {
       el.addEventListener("click", (ev) => {
-        const $otherWork = document.querySelector(otherId) as HTMLInputElement
+        const $other = document.querySelector(otherId) as HTMLInputElement
         const $wrapper = document.querySelector(wrapperId)
-        if ($otherWork.checked) {
+        if ($other.checked) {
           $wrapper?.classList.remove("hidden")
         } else {
           $wrapper?.classList.add("hidden")
