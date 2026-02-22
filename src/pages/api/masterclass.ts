@@ -20,7 +20,30 @@ export const POST: APIRoute = async ({ request }) => {
   const ref = data.get("ref")
   const otherWork = data.get("other-work-input-text")
   const otherUniversity = data.get("other-university-input-text")
-  const payImg = data.get("pay")
+  const payImg = data.get("pay") as File
+
+  if (
+    !name ||
+    !dni ||
+    !email ||
+    !phone ||
+    !igUsername ||
+    !findUs ||
+    !underAge ||
+    !disability ||
+    !work ||
+    !university ||
+    !experience ||
+    !ref ||
+    !payImg
+  ) {
+    return new Response(
+      JSON.stringify({
+        message: "Error missing required fields",
+      }),
+      { status: 400 },
+    )
+  }
 
   const id = randomUUID()
   const splitted = payImg?.name?.split(".")[1]
@@ -46,10 +69,10 @@ export const POST: APIRoute = async ({ request }) => {
   }) */
 
   try {
-    const rs = await turso.execute({
+    await turso.execute({
       sql: "INSERT INTO participants (id, name, dni, email,phone, ig_username, find_us, under_age, disability, work, university, experience, pay_ref, pay_img) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
       args: [
-        id,
+        id.toString(),
         name?.toString(),
         dni?.toString(),
         email?.toString(),
@@ -68,6 +91,11 @@ export const POST: APIRoute = async ({ request }) => {
       ],
     })
 
+    const blob = await put(`pays/${rename}`, payImg, {
+      access: "private",
+      token: import.meta.env.BLOB_READ_WRITE_TOKEN,
+    })
+
     const { rows } = await turso.execute({
       sql: "SELECT * FROM participants WHERE id = ?",
       args: [id],
@@ -82,25 +110,11 @@ export const POST: APIRoute = async ({ request }) => {
     )
   } catch (err) {
     console.log(err)
-  }
-  //const splitted = payImg?.name?.split('.')[0]
-
-  //const rename = `${}`
-
-  // Validate the data - you'll probably want to do more than this
-  if (!name || !email) {
     return new Response(
       JSON.stringify({
-        message: "Missing required fields",
+        message: "Error to save data",
       }),
-      { status: 400 },
+      { status: 500 },
     )
   }
-  // Do something with the data, then return a success response
-  return new Response(
-    JSON.stringify({
-      message: "Success!",
-    }),
-    { status: 200 },
-  )
 }
