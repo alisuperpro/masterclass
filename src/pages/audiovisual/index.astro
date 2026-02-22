@@ -1,13 +1,35 @@
 ---
-import Banner from "../../components/Banner.astro"
 import Layout from "../../layouts/Layout.astro"
 ---
 
 <Layout>
-  <section class="py-2 bg-gray-100 pb-8">
-    <div class="max-w-2xl mx-auto my-0">
-      <Banner />
+  <section class="bg-[url('/banner.png')] bg-cover bg-center h-screen">
+    <div class="bg-black/50 h-full text-white">
+      <nav class="w-full grid grid-cols-3 py-2">
+        <div></div>
+        <div class="flex flex-row justify-center items-center gap-x-4">
+          <a href="/">Inicio</a>
+
+          <a href="#parati">Para quién es</a>
+
+          <a href="#ubicacion">Ubicacion</a>
+        </div>
+        <div class="flex flex-row justify-center items-center">
+          <a
+            href="/audiovisual/formulario"
+            class="text-white bg-blue-400 rounded-md px-4 py-2"
+            >Quiero participar</a
+          >
+        </div>
+      </nav>
     </div>
-    <a href="/audiovisual/formulario">Participar</a>
+
+    <div id="parati">
+      <h2>Para ti</h2>
+    </div>
+
+    <div id="ubicacion">
+      <h2>Ubicacion</h2>
+    </div>
   </section>
 </Layout>

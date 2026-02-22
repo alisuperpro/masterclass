@@ -1,0 +1,24 @@
+---
+const classes = [
+  {
+    img: "/banner.png",
+    href: "/audiovisual",
+  },
+]
+---
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 px-4">
+  <h1 class="col-span-full font-bold text-2xl">Clases</h1>
+
+  {
+    classes.map((el) => {
+      return (
+        <div class="col-span-1">
+          <a href={el.href}>
+            <img src={el.img} alt="" class="rounded-lg" />
+          </a>
+        </div>
+      )
+    })
+  }
+</div>
