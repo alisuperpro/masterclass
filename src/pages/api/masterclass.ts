@@ -21,6 +21,7 @@ export const POST: APIRoute = async ({ request }) => {
   const otherWork = data.get("other-work-input-text") ?? ""
   const otherUniversity = data.get("other-university-input-text") ?? ""
   const payImg = data.get("pay") as File
+  const menu = data.get("menu")
 
   if (
     !name ||
@@ -35,7 +36,8 @@ export const POST: APIRoute = async ({ request }) => {
     !university ||
     !experience ||
     !ref ||
-    !payImg
+    !payImg ||
+    !menu
   ) {
     return new Response(
       JSON.stringify({
@@ -52,7 +54,7 @@ export const POST: APIRoute = async ({ request }) => {
 
   try {
     await turso.execute(
-      "INSERT INTO participants (id, name, dni, email,phone, ig_username, find_us, under_age, disability, work, university, experience, pay_ref, pay_img) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+      "INSERT INTO participants (id, name, dni, email,phone, ig_username, find_us, under_age, disability, work, university, experience, pay_ref, pay_img, menu) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
       [
         id.toString(),
         name?.toString(),
@@ -70,6 +72,7 @@ export const POST: APIRoute = async ({ request }) => {
         experience?.toString(),
         ref?.toString(),
         rename,
+        menu.toString(),
       ],
     )
 

@@ -153,6 +153,34 @@ const experience = [
     name: "experience",
   },
 ]
+
+const menu = [
+  {
+    id: "menu-a",
+    label: "Asado negro con arroz y ensalada rallada",
+    name: "menu",
+    value: "Asado negro",
+  },
+  {
+    id: "menu-b",
+    label: "Pollo a la plancha con puré y ensalada rallada",
+    name: "menu",
+    value: "Pollo a la plancha",
+  },
+  {
+    id: "menu-c",
+    label: "Pasta boloñesa con plátano y pan",
+    name: "menu",
+    value: "Pasta boloñesa",
+  },
+  {
+    id: "menu-d",
+    label:
+      "Hamburguesa clásica: carne salsas tradicionales, vegetales y queso con ración de papas fritas",
+    name: "menu",
+    value: "Hamburguesa",
+  },
+]
 ---
 
 <Layout>
@@ -325,6 +353,28 @@ const experience = [
                   label={el.label}
                   name={el.name}
                   value={el.label}
+                />
+              )
+            })
+          }
+        </div>
+
+        <div
+          class="flex flex-col gap-y-2 bg-white rounded-lg px-4 py-2 border border-gray-300"
+        >
+          <h2 class="font-bold text-lg">
+            Menu <span class="font-semibold text-sm text-gray-600"
+              >(Todos las opciones incluyen bebida)</span
+            >
+          </h2>
+          {
+            menu.map((el) => {
+              return (
+                <CheckBox
+                  id={el.id}
+                  label={el.label}
+                  name={el.name}
+                  value={el.value}
                 />
               )
             })
