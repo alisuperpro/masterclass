@@ -1,7 +1,7 @@
 import type { APIRoute } from "astro"
 import { turso } from "../../turso"
 
-export const POST: APIRoute = async ({ request }) => {
+export const PUT: APIRoute = async ({ request }) => {
   const data = await request.json()
 
   const { id, isDelivered } = data
