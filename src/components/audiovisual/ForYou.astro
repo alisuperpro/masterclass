@@ -1,0 +1,43 @@
+---
+const list = [
+  {
+    title: "Aprender a editar videos con acabado profesional",
+  },
+  {
+    title: "Mejorar la calidad de tus contenidos para redes sociales",
+  },
+  {
+    title: "Optimizar tu tiempo de edición usando herramientas inteligentes",
+  },
+  {
+    title: "Dar el siguiente nivel a tus conocimientos básicos",
+  },
+  {
+    title: "Lograr mayor impacto y ritmo en tus videos",
+  },
+  {
+    title: "Dominar formatos verticales y horizontales correctamente",
+  },
+]
+---
+
+<section
+  id="parati"
+  class="px-8 bg-[url('/foryou-bg.png')] bg-cover bg-no-repeat bg-center flex flex-col pt-8 pb-8"
+>
+  <h2 class="font-bold text-white text-3xl text-center mb-12">
+    Esta Master Class es para ti si buscas
+  </h2>
+
+  <div class="w-full flex justify-center items-center">
+    <ul class="grid grid-cols-1 md:grid-cols-3 gap-6 w-3/4">
+      {
+        list.map((el) => (
+          <li class="backdrop-blur-2xl bg-white/5 p-4 rounded-md">
+            <span class="text-white">{el.title}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

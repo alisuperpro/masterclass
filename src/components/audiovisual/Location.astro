@@ -1,0 +1,43 @@
+---
+import LocationDotIcon from "../../icons/LocationDotIcon.astro"
+import CalendarIcon from "../../icons/CalendarIcon.astro"
+import ClockIcon from "../../icons/ClockIcon.astro"
+---
+
+<section id="ubicacion" class="bg-gray-200 py-12 px-8">
+  <h2 class="font-bold text-theme-blue text-3xl text-center mb-6">
+    ¿Cuando y dónde será esta Master Class?
+  </h2>
+
+  <div class="flex justify-center items-center h-1/2 py-10">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-x-4 gap-y-8 w-3/4">
+      <div class="flex justify-center items-center flex-col">
+        <CalendarIcon class="w-12 text-theme-blue" />
+        <p class="text-lg">Viernes, 6 de marzo</p>
+      </div>
+
+      <div class="flex flex-col justify-center items-center">
+        <ClockIcon class="w-12 text-theme-blue" />
+        <span class="text-lg">1:30 p. m. - 4:00 p. m.</span>
+      </div>
+      <div class="flex flex-col justify-center items-center">
+        <LocationDotIcon class="w-12 text-theme-blue" />
+        <span class="text-lg">Lotería de Oriente</span>
+      </div>
+    </div>
+  </div>
+  <div
+    class="flex justify-center items-center flex-col md:flex-row gap-x-4 gap-y-4"
+  >
+    <a
+      href="https://maps.app.goo.gl/mcJB3zU3zviNmHyb7"
+      class="text-theme-blue border border-theme-blue rounded-full px-8 py-4 font-semibold"
+      target="_blank">Ver ubicación</a
+    >
+    <a
+      href="/audiovisual/formulario"
+      class="text-white bg-theme-blue rounded-full px-8 py-4 font-semibold"
+      >Quiero participar</a
+    >
+  </div>
+</section>

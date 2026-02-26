@@ -1,0 +1,60 @@
+---
+import QuestionMarkIcon from "../../icons/QuestionMarkIcon.astro"
+
+const faq = [
+  {
+    question: "¿Necesito experiencia previa?",
+    answer:
+      "No es obligatorio. Puedes asistir con conocimientos básicos o intermedios.",
+  },
+  /* {
+    question: "¿Debo llevar laptop?",
+    answer:
+      "No es obligatorio. Puedes asistir sin equipo, pero si deseas practicar durante la sesión, recomendamos llevar tu laptop.",
+  }, */
+  {
+    question: "¿Qué programa se utilizará?",
+    answer:
+      "Durante la master class hablaremos de varios programas de edición, entre ellos Adobe Premiere y CapCut, aplicando conceptos que podrás adaptar a diferentes softwares.",
+  },
+  {
+    question: "¿Recibo certificado?",
+    answer: "Sí, recibirás certificado de participación.",
+  },
+  {
+    question: "¿La formación es presencial o virtual?",
+    answer: "La master class es presencial.",
+  },
+  /* {
+    question: "¿Incluye material?",
+    answer:
+      "Sí, incluye guía digital, recursos audiovisuales y beneficios adicionales.",
+  }, */
+]
+---
+
+<section
+  class='py-8 px-8 bg-[url("/learning-bg.png")] bg-cover bg-center flex flex-col'
+>
+  <h2
+    class="font-bold text-2xl md:text-4xl text-theme-blue text-center mb-4 md:mb-8"
+  >
+    Preguntas Frecuentes
+  </h2>
+
+  <div class="flex justify-center items-center">
+    <ul class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-10 md:max-w-3/4">
+      {
+        faq.map((el) => (
+          <li class="rounded-2xl border-2 border-theme-blue px-4 py-4 flex gap-y-4 flex-col shadow-lg">
+            <h4 class="font-semibold text-lg flex flex-row items-center">
+              <QuestionMarkIcon class="size-6 text-theme-blue" />
+              {el.question}
+            </h4>
+            <p class="italic text-sm md:text-base">{el.answer}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

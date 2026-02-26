@@ -1,35 +1,96 @@
 ---
+import ForYou from "../../components/audiovisual/ForYou.astro"
+import About from "../../components/audiovisual/About.astro"
+import Learning from "../../components/audiovisual/Learning.astro"
+import Location from "../../components/audiovisual/Location.astro"
+import Sponsors from "../../components/audiovisual/Sponsors.astro"
+import Includes from "../../components/audiovisual/Includes.astro"
+import CMlogo from "../../icons/CMlogo.astro"
 import Layout from "../../layouts/Layout.astro"
+import Testimonials from "../../components/audiovisual/Testimonials.astro"
+import AdressedTo from "../../components/audiovisual/AdressedTo.astro"
+import LimitedTickets from "../../components/audiovisual/LimitedTickets.astro"
+import FaQ from "../../components/audiovisual/FaQ.astro"
+import Process from "../../components/audiovisual/Process.astro"
+import Footer from "@/components/audiovisual/Footer.astro"
 ---
 
 <Layout>
-  <section class="bg-[url('/banner.png')] bg-cover bg-center h-screen">
-    <div class="bg-black/50 h-full text-white">
-      <nav class="w-full grid grid-cols-3 py-2">
-        <div></div>
-        <div class="flex flex-row justify-center items-center gap-x-4">
-          <a href="/">Inicio</a>
-
-          <a href="#parati">Para quién es</a>
-
-          <a href="#ubicacion">Ubicacion</a>
+  <section class="bg-[url('/hero-bg.jpeg')] bg-cover bg-center h-screen">
+    <div class="bg-black/60 h-full text-white flex justify-between flex-col">
+      <nav class="w-full grid grid-cols-1 md:grid-cols-4 gap-y-6 pt-4">
+        <div class="flex justify-center items-center">
+          <CMlogo class="w-32" />
         </div>
-        <div class="flex flex-row justify-center items-center">
+        <div
+          class="col-span-2 hidden md:visible md:flex flex-row justify-center items-center gap-x-8 w-full"
+        >
+          <a href="/" class="font-semibold text-lg hover:underline">Inicio</a>
+
+          <a href="#aprenderas" class="font-semibold text-lg hover:underline"
+            >Qué aprenderás</a
+          >
+          <a href="#parati" class="font-semibold text-lg hover:underline"
+            >Para quién es</a
+          >
+          <a href="#incluye" class="font-semibold text-lg hover:underline"
+            >Qué incluye</a
+          >
+
+          <a href="#ubicacion" class="font-semibold text-lg hover:underline"
+            >Ubicación</a
+          >
+        </div>
+        <div class="flex flex-row justify-center items-end mb-1">
           <a
             href="/audiovisual/formulario"
-            class="text-white bg-blue-400 rounded-md px-4 py-2"
+            class="text-white hover:bg-theme-blue hover:border-theme-blue transition-colors border-2 border-white rounded-full px-4 py-2 font-semibold"
             >Quiero participar</a
           >
         </div>
       </nav>
+
+      <div class="pl-12 md:pl-16 flex flex-col">
+        <h1 class="font-bold text-4xl md:text-5xl" id="title">
+          Master Class <br /> Edición Audiovisual
+        </h1>
+        <span class="text-xl md:text-2xl italic" id="author"
+          >Por Jorge Maurera</span
+        >
+        <span class="italic pt-8 md:text-lg" id="text"
+          >Domina la edición audiovisual <br /> y eleva la calidad de tus contenidos.</span
+        >
+      </div>
+
+      <Sponsors />
     </div>
 
-    <div id="parati">
-      <h2>Para ti</h2>
-    </div>
+    <Learning />
 
-    <div id="ubicacion">
-      <h2>Ubicacion</h2>
-    </div>
+    <Testimonials />
+    <Includes />
+    <About />
+    <ForYou />
+    <Location />
+    <AdressedTo />
+    <LimitedTickets />
+    <FaQ />
+    <Process />
+    <Footer />
   </section>
 </Layout>
+
+<script>
+  import { gsap } from "gsap"
+
+  let tl = gsap.timeline()
+
+  tl.from("#title", { opacity: 0 })
+  tl.to("#title", { opacity: 1, ease: "linear", duration: 1 })
+
+  tl.from("#author", { x: -30, opacity: 0 })
+  tl.to("#author", { x: 0, opacity: 1, ease: "linear", duration: 0.5 })
+
+  tl.from("#text", { opacity: 0 })
+  tl.to("#text", { opacity: 1, ease: "linear", duration: 1 })
+</script>

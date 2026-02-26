@@ -1,0 +1,158 @@
+---
+import QuoteLeftIcon from "../../icons/QuoteLeftIcon.astro"
+
+const testimonials = [
+  {
+    name: "Omar Hernández",
+    text: `Aprendí a utilizar correctamente las líneas de corte en las fotografías y entendí mucho mejor el proceso de edición. Recomiendo esta master class porque fomenta el profesionalismo en la presentación de la información`,
+  },
+  {
+    name: "Jennifer Figueroa",
+    text: `Aprendí sobre sonido, keyframes, transiciones y composición, siempre pensando en qué quiero transmitir al editar. La recomiendo porque es completa, inspiradora y perfecta para empezar en el mundo audiovisual.`,
+  },
+  {
+    name: "Mariela León",
+    text: `Aprendí sobre el ritmo de la edición y la regla de los tercios. Me ayudó mucho a aclarar dudas. La recomiendo porque el ponente explica de forma clara, concisa y siempre dispuesto a aclarar dudas.`,
+  },
+  {
+    name: "Abiezer Fuenmayor",
+    text: `Aprendí que la edición va más allá de cortar clips; se trata de entender el ritmo, la atención del espectador y la narrativa visual. Me ayudó a mejorar detalles técnicos que marcan la diferencia entre un video común y uno profesional. La recomiendo porque es clara, práctica e ideal para quien quiera evolucionar de montar imágenes a editar con visión creativa.`,
+  },
+  {
+    name: "Gerardin Mata",
+    text: `Aprendí a reconocer las herramientas de edición y sus funciones, lo que facilita mucho el proceso de trabajo. La formación es muy buena para quienes comienzan en edición, porque enseña a usar los programas de forma sencilla y clara. La recomendaría porque es una guía básica, bien explicada y fácil de entender de principio a fin.`,
+  },
+]
+---
+
+<section
+  class="px-4 py-16 flex flex-col gap-y-10 justify-center items-center overflow-hidden bg-white"
+>
+  <h2 class="font-bold text-4xl text-theme-blue">Testimonios</h2>
+
+  <div class="relative w-full overflow-visible">
+    <div class="flex items-center" id="carousel-track">
+      {
+        [
+          testimonials[testimonials.length - 1],
+          ...testimonials,
+          testimonials[0],
+        ].map((el, index) => (
+          <div class="testimonial-card shrink-0 w-75 md:w-125 px-4 opacity-40 transition-all duration-500">
+            <div class="card-content bg-gray-50 border border-gray-100 rounded-3xl p-8 md:p-12 shadow-sm relative overflow-hidden h-full flex flex-col justify-between">
+              <div class="absolute inset-0 bg-linear-to-br from-blue-100/40 via-white to-white pointer-events-none opacity-0 active-gradient transition-opacity duration-500" />
+
+              <div class="relative z-10">
+                <QuoteLeftIcon class="size-10 text-theme-blue mb-4 opacity-60" />
+                <p class="text-md md:text-lg text-gray-700 leading-relaxed italic">
+                  "{el.text}"
+                </p>
+              </div>
+              <span class="relative z-10 font-bold text-theme-blue mt-6 block">
+                — {el.name}
+              </span>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="flex gap-x-6 mt-12 justify-center">
+      <button
+        id="prevBtn"
+        class="group bg-white border-2 border-theme-blue text-theme-blue size-14 rounded-full font-bold hover:bg-theme-blue hover:text-white transition-all flex items-center justify-center"
+      >
+        <span class="group-hover:-translate-x-1 transition-transform">←</span>
+      </button>
+      <button
+        id="nextBtn"
+        class="group bg-white border-2 border-theme-blue text-theme-blue size-14 rounded-full font-bold hover:bg-theme-blue hover:text-white transition-all flex items-center justify-center"
+      >
+        <span class="group-hover:translate-x-1 transition-transform">→</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .is-active .active-gradient {
+    opacity: 1;
+  }
+  .is-active .card-content {
+    border-color: #2563eb;
+    box-shadow: 0 25px 50px -12px rgba(37, 99, 235, 0.15);
+    transform: translateY(-10px);
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap"
+
+  const track = document.getElementById("carousel-track")
+  const cards = document.querySelectorAll(".testimonial-card")
+  const prevBtn = document.getElementById("prevBtn")
+  const nextBtn = document.getElementById("nextBtn")
+
+  // Empezamos en el índice 1 (porque el 0 es el clon del último)
+  let currentIndex = 1
+  let isAnimating = false
+  const totalRealSlides = cards.length - 2
+
+  function updateCarousel(animated = true) {
+    const cardWidth = (cards[0] as HTMLElement).offsetWidth
+    const centerOffset = window.innerWidth / 2 - cardWidth / 2
+    const moveX = -currentIndex * cardWidth + centerOffset
+
+    if (animated) isAnimating = true
+
+    gsap.to(track, {
+      x: moveX,
+      duration: animated ? 0.7 : 0,
+      ease: "power3.inOut",
+      onComplete: () => {
+        isAnimating = false
+        checkLoop()
+      },
+    })
+
+    // Estilos visuales
+    cards.forEach((card, i) => {
+      if (i === currentIndex) {
+        card.classList.add("is-active")
+        gsap.to(card, { opacity: 1, scale: 1.05, duration: 0.5 })
+      } else {
+        card.classList.remove("is-active")
+        gsap.to(card, { opacity: 0.3, scale: 0.9, duration: 0.5 })
+      }
+    })
+  }
+
+  function checkLoop() {
+    // Si llegamos al clon del final, saltamos al primer original
+    if (currentIndex === cards.length - 1) {
+      currentIndex = 1
+      updateCarousel(false)
+    }
+    // Si llegamos al clon del inicio, saltamos al último original
+    if (currentIndex === 0) {
+      currentIndex = cards.length - 2
+      updateCarousel(false)
+    }
+  }
+
+  nextBtn?.addEventListener("click", () => {
+    if (isAnimating) return
+    currentIndex++
+    updateCarousel()
+  })
+
+  prevBtn?.addEventListener("click", () => {
+    if (isAnimating) return
+    currentIndex--
+    updateCarousel()
+  })
+
+  // Inicializar
+  updateCarousel(false)
+  window.addEventListener("resize", () => updateCarousel(false))
+</script>

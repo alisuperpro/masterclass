@@ -1,0 +1,88 @@
+---
+import WpFormsIcon from "../../icons/WpFormsIcon.astro"
+import CreditCardIcon from "../../icons/CreditCardIcon.astro"
+import ReceiptIcon from "../../icons/ReceiptIcon.astro"
+import EmailCheckIcon from "../../icons/EmailCheckIcon.astro"
+
+const list = [
+  {
+    title: "Completa el formulario de registro",
+    icon: WpFormsIcon,
+  },
+  {
+    title: "Realiza el pago correspondiente",
+    icon: CreditCardIcon,
+  },
+  {
+    title: "Envía el comprobante",
+    icon: ReceiptIcon,
+  },
+  {
+    title: "Recibe confirmación oficial de tu cupo",
+    icon: EmailCheckIcon,
+  },
+]
+---
+
+<section class="bg-gray-100 py-12 px-6">
+  <div class="max-w-4xl mx-auto">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-bold text-theme-blue mb-2">
+        Proceso de Inscripción
+      </h2>
+      <p class="italic text-gray-600">Inscribirte es muy sencillo</p>
+    </div>
+
+    <div class="relative">
+      <div
+        class="absolute w-1 bg-blue-200 h-full left-4 md:left-1/2 transform md:-translate-x-1/2"
+      >
+      </div>
+
+      <ul class="space-y-10">
+        {
+          list.map((el, index) => {
+            const isEven = index % 2 === 0
+            const Icon = el.icon
+
+            return (
+              <li class="relative flex items-center">
+                <div
+                  class={`flex flex-col md:flex-row items-center w-full ${isEven ? "md:flex-row-reverse" : ""}`}
+                >
+                  {/* Contenedor de Texto */}
+                  <div
+                    class={`w-full md:w-1/2 pl-12 md:pl-0 ${isEven ? "md:pl-12" : "md:pr-12 md:text-right"}`}
+                  >
+                    <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
+                      <p class="text-gray-800 font-semibold leading-tight">
+                        {el.title}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Icono / Círculo */}
+                  <div class="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 flex items-center justify-center">
+                    <div class="z-10 bg-theme-blue p-3 rounded-full text-white ring-4 ring-gray-100 shadow-sm">
+                      <Icon class="size-6 md:size-10" />
+                    </div>
+                  </div>
+
+                  {/* Espaciador invisible para mantener el zigzag en desktop */}
+                  <div class="hidden md:block w-1/2" />
+                </div>
+              </li>
+            )
+          })
+        }
+      </ul>
+    </div>
+    <div class="flex flex-row justify-center items-end mb-1 mt-8">
+      <a
+        href="/audiovisual/formulario"
+        class="text-white bg-theme-blue rounded-full px-8 py-4 font-semibold"
+        >Quiero participar</a
+      >
+    </div>
+  </div>
+</section>

@@ -1,0 +1,73 @@
+---
+import FacebookIcon from "@/icons/FacebookIcon.astro"
+import InstagramIcon from "@/icons/InstagramIcon.astro"
+import ThreadsIcon from "@/icons/ThreadsIcon.astro"
+import TiktokIcon from "@/icons/TiktokIcon.astro"
+import XIcon from "@/icons/XIcon.astro"
+import YoutubeIcon from "@/icons/YoutubeIcon.astro"
+
+export const CONTACT = {
+  PHONE: "+584161974728",
+  EMAIL: "consultas@cachemarketing.net",
+  FB: "https://facebook.com/cachemarketingve",
+  X: "https://x.com/cachemarketing",
+  IG: "https://instagram.com/cachemarketing",
+  TIKTOK: "https://tiktok.com/@cachemarketing",
+  YT: "https://youtube.com/@cachemarketingve",
+  THREADS: "https://threads.net/cachemarketing",
+}
+
+const SOCIAL_LINK = [
+  {
+    name: "Facebook",
+    link: CONTACT.FB,
+    icon: FacebookIcon,
+    color: "blue-600",
+  },
+  {
+    name: "X",
+    link: CONTACT.X,
+    icon: XIcon,
+    color: "white",
+  },
+  {
+    name: "Instagram",
+    link: CONTACT.IG,
+    icon: InstagramIcon,
+    color: "fuchsia-600",
+  },
+  {
+    name: "Tiktok",
+    link: CONTACT.TIKTOK,
+    icon: TiktokIcon,
+    color: "green-600",
+  },
+  {
+    name: "Threads",
+    link: CONTACT.THREADS,
+    icon: ThreadsIcon,
+  },
+  {
+    name: "Youtube",
+    link: CONTACT.YT,
+    icon: YoutubeIcon,
+  },
+]
+---
+
+{
+  SOCIAL_LINK.map((social) => {
+    const Icon = social.icon
+    return (
+      <a
+        href={social.link}
+        aria-label={`Ir a ${social.name}`}
+        rel="nofollow noreferrer"
+        target="_blank"
+        class="block transition-transform duration-150 ease-linear hover:scale-125 hover:text-yellow-600"
+      >
+        <Icon class="size-4" />
+      </a>
+    )
+  })
+}

@@ -1,0 +1,83 @@
+---
+import ClapperboardIcon from "../../icons/ClapperboardIcon.astro"
+import ScissorIcon from "../../icons/ScissorIcon.astro"
+import PaletteIcon from "../../icons/PaletteIcon.astro"
+import PhoneIcon from "../../icons/PhoneIcon.astro"
+import RobotIcon from "../../icons/RobotIcon.astro"
+import GearsIcon from "../../icons/GearsIcon.astro"
+
+const list = [
+  {
+    title: "Lenguaje audiovisual",
+    description:
+      "Aprenderás a entender la narrativa visual, tipos de planos, continuidad y cómo contar historias que conecten.",
+    icon: ClapperboardIcon,
+  },
+  {
+    title: "Ritmo y cortes estratégicos",
+    description:
+      "Dominarás el timing, los cortes precisos y cómo mantener la atención del espectador.",
+    icon: ScissorIcon,
+  },
+  {
+    title: "Colorimetría básica aplicada",
+    description:
+      "Ajusta colores correctamente para lograr una estética profesional y coherente.",
+    icon: PaletteIcon,
+  },
+  {
+    title: "Formatos vertical y horizontal",
+    description:
+      "Aprende a editar para redes sociales y plataformas digitales sin perder calidad ni impacto.",
+    icon: PhoneIcon,
+  },
+  {
+    title: "Uso de IA en edición",
+    description:
+      "Descubre cómo usar herramientas inteligentes para agilizar tu flujo de trabajo y ahorrar tiempo.",
+    icon: RobotIcon,
+  },
+  {
+    title: "Flujo de trabajo profesional",
+    description:
+      "Organización de archivos, exportaciones correctas y entrega final optimizada.",
+    icon: GearsIcon,
+  },
+]
+---
+
+<section
+  class="pt-8 pb-12 px-8 bg-[url('/learning-bg.png')] bg-cover bg-center"
+  id="aprenderas"
+>
+  <div class="mb-6 flex flex-col gap-y-4 justify-center items-center">
+    <h2 class="font-bold text-lg md:text-4xl text-theme-blue">
+      ¿Qué aprenderás en esta Master Class?
+    </h2>
+    <p class="md:max-w-1/2 text-center italic text-sm md:text-md">
+      En esta formación intensiva descubrirás cómo editar con criterio
+      profesional, optimizando tiempo y elevando la calidad de tus videos.
+    </p>
+  </div>
+
+  <div class="md:px-8 md:pl-20">
+    <ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {
+        list.map((el) => {
+          const Icon = el.icon
+          return (
+            <li class="p-4 flex flex-row gap-x-2">
+              <span>
+                <Icon class="size-12 text-theme-blue" />{" "}
+              </span>
+              <div>
+                <h3 class="font-bold text-xl">{el.title}</h3>
+                <p class="text-pretty md:max-w-3/4">{el.description}</p>
+              </div>
+            </li>
+          )
+        })
+      }
+    </ul>
+  </div>
+</section>

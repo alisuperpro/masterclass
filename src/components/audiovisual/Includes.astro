@@ -1,0 +1,89 @@
+---
+import AwardIcon from "../../icons/AwardIcon.astro"
+import RouteIcon from "../../icons/RouteIcon.astro"
+import KeyUnlockIcon from "../../icons/KeyUnlockIcon.astro"
+import FileVideoIcon from "../../icons/FileVideoIcon.astro"
+import FileDownloadIcon from "../../icons/FileDownloadIcon.astro"
+
+const list = [
+  {
+    title: "Certificado impreso",
+    description: "Reconocimiento formal de participación en la formación.",
+    icon: AwardIcon,
+  },
+  {
+    title: "Guía digital de apoyo",
+    description: "Material complementario para reforzar lo aprendido.",
+    icon: RouteIcon,
+  },
+  {
+    title: "Acceso a CapCut Pro (1 mes)",
+    description:
+      "Herramienta profesional para que practiques y perfecciones tus ediciones.",
+    icon: KeyUnlockIcon,
+  },
+  {
+    title: "Recursos audiovisuales",
+    description:
+      "Light leaks, efectos y material práctico para aplicar en tus proyectos.",
+    icon: FileVideoIcon,
+  },
+  {
+    title: "Material descargable",
+    description: "Archivos y ejemplos utilizados durante la clase.",
+    icon: FileDownloadIcon,
+  },
+]
+---
+
+<section class="md:px-12 py-14 md:py-20 border-t border-gray-300" id="incluye">
+  <div class="grid grid-cols-1 md:grid-cols-2 w-full px-12 pt-4">
+    <div class="flex flex-col justify-between pb-8">
+      <div>
+        <div class="mb-6 flex flex-col gap-y-4">
+          <h2 class="font-bold text-xl md:text-3xl text-theme-blue">
+            ¿Qué incluye tu inscripción?
+          </h2>
+          <p class="italic text-sm md:text-md">
+            Prepárate para aprender, practicar y llevar tus habilidades al
+            siguiente nivel. Con estos recursos tendrás todo lo necesario para
+            aprovechar al máximo la formación, aplicar lo aprendido de forma
+            inmediata y seguir mejorando tus proyectos audiovisuales.
+          </p>
+        </div>
+
+        <span class="text-xl font-semibold">Beneficios de tu inscripción:</span>
+        <ul class="list-disc px-8 pt-4">
+          {
+            list.map((el) => {
+              const Icon = el.icon
+              return (
+                <li class="list-item">
+                  <h3 class="">{el.title}</h3>
+                </li>
+              )
+            })
+          }
+        </ul>
+      </div>
+
+      <div class="hidden md:block">
+        <a
+          href="/audiovisual/formulario"
+          class="text-white bg-theme-blue rounded-full px-8 py-4 font-semibold"
+          >Quiero participar</a
+        >
+      </div>
+    </div>
+    <div class="flex justify-center items-center">
+      <img src="/includes.jpeg" class="w-[55%] rounded-md" alt="" />
+    </div>
+    <div class="md:hidden visible mt-8 flex justify-center items-center">
+      <a
+        href="/audiovisual/formulario"
+        class="text-white bg-theme-blue rounded-full px-8 py-4 font-semibold"
+        >Quiero participar</a
+      >
+    </div>
+  </div>
+</section>

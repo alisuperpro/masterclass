@@ -1,0 +1,69 @@
+---
+const SPONSORS = [
+  {
+    name: "productos-promoca",
+    img: "/sponsors/promoca.png",
+    class: "md:w-44 w-24",
+    contact: "https://productospromoca.com",
+  },
+  {
+    name: "cafe-turimiquire",
+    img: "/sponsors/cafe-turimiquire.png",
+    contact: "https://www.instagram.com/cafe.turimiquire",
+  },
+  {
+    name: "bn-publicidad",
+    img: "/sponsors/bn-publicidad.png",
+    class: "md:w-44 w-24",
+    contact: "https://www.instagram.com/bnpublicidad.ve",
+  },
+
+  {
+    name: "cafe-de-tus-sueños",
+    img: "/sponsors/cafe-de-tus-sueños.png",
+    contact: "https://www.instagram.com/keilamartiarena",
+  },
+
+  {
+    name: "claj",
+    img: "/sponsors/claj.png",
+    contact: "https://www.instagram.com/clajsistec",
+  },
+
+  {
+    name: "bubbers",
+    img: "/sponsors/bubbers.png",
+    class: "w-20",
+    contact: "https://www.instagram.com/bubbersccpmaturin",
+  },
+]
+---
+
+<div class="grid md:grid-cols-6 grid-cols-2 justify-center items-center px-8">
+  {
+    SPONSORS.map((el) => (
+      <div class="flex justify-center items-center sponsors">
+        <a href={el.contact}>
+          <img
+            src={el.img}
+            alt={"Cache marketing Patrocinadores"}
+            id={el.name}
+            class={el.class ? el.class : "w-28"}
+          />
+        </a>
+      </div>
+    ))
+  }
+</div>
+
+<script>
+  import { gsap } from "gsap"
+
+  gsap.from(".sponsors", { opacity: 0, y: 40 })
+  gsap.to(".sponsors", {
+    opacity: 1,
+    y: 0,
+    ease: "linear",
+    duration: 1.5,
+  })
+</script>

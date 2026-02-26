@@ -184,8 +184,8 @@ const menu = [
 ---
 
 <Layout>
-  <section class="py-2 bg-gray-100 pb-8">
-    <div class="max-w-2xl mx-auto my-0">
+  <section class="py-2 bg-gray-100 pb-8 px-8 md:px-0">
+    <div class="md:max-w-2xl mx-auto my-0">
       <Banner />
 
       <form class="py-2 rounded-lg flex flex-col gap-y-2">
@@ -200,7 +200,7 @@ const menu = [
 
         <Input
           id="dni-input"
-          label="Numero de cedula"
+          label="Número de cédula"
           placeholder="respuesta corta"
           type="text"
           name="dni"
@@ -237,7 +237,9 @@ const menu = [
         <div
           class="flex flex-col gap-y-2 bg-white rounded-lg px-4 py-2 border border-gray-300"
         >
-          <h2 class="font-bold text-lg">¿Cómo se enteró de la Master Class?</h2>
+          <h2 class="font-bold text-md md:text-lg">
+            ¿Cómo se enteró de la Master Class?
+          </h2>
           {
             findUs.map((el) => {
               return (
@@ -255,7 +257,7 @@ const menu = [
         <div
           class="flex flex-col gap-y-2 bg-white rounded-lg px-4 py-2 border border-gray-300"
         >
-          <h2 class="font-bold text-lg">¿Menor de edad?</h2>
+          <h2 class="font-bold text-md md:text-lg">¿Menor de edad?</h2>
           {
             underAge.map((el) => {
               return (
@@ -282,7 +284,7 @@ const menu = [
         <div
           class="flex flex-col gap-y-2 bg-white rounded-lg px-4 py-2 border border-gray-300"
         >
-          <h2 class="font-bold text-lg">
+          <h2 class="font-bold text-md md:text-lg">
             Actualmente, ¿eres estudiante o profesional?
           </h2>
           {
@@ -312,7 +314,7 @@ const menu = [
         <div
           class="flex flex-col gap-y-2 bg-white rounded-lg px-4 py-2 border border-gray-300"
         >
-          <h2 class="font-bold text-lg">
+          <h2 class="font-bold text-md md:text-lg">
             ¿En qué universidad estudias o egresaste?
           </h2>
           {
@@ -342,7 +344,7 @@ const menu = [
         <div
           class="flex flex-col gap-y-2 bg-white rounded-lg px-4 py-2 border border-gray-300"
         >
-          <h2 class="font-bold text-lg">
+          <h2 class="font-bold text-md md:text-lg">
             ¿Tienes experiencia en el área audiovisual?
           </h2>
           {
@@ -359,10 +361,10 @@ const menu = [
           }
         </div>
 
-        <div
+        <!--  <div
           class="flex flex-col gap-y-2 bg-white rounded-lg px-4 py-2 border border-gray-300"
         >
-          <h2 class="font-bold text-lg">
+          <h2 class="font-bold text-md md:text-lg">
             Menu <span class="font-semibold text-sm text-gray-600"
               >(Todos las opciones incluyen bebida)</span
             >
@@ -379,10 +381,10 @@ const menu = [
               )
             })
           }
-        </div>
+        </div> -->
 
         <div class="bg-white px-4 py-2 rounded-lg">
-          <h2 class="font-bold text-lg">Datos de pago</h2>
+          <h2 class="font-bold text-md md:text-lg">Datos de pago</h2>
           <p>0102 26157134 04161974728 $5 BCV</p>
         </div>
 
@@ -390,7 +392,7 @@ const menu = [
           id="ref-input"
           label="Referencia de pago"
           placeholder="respuesta corta"
-          type="text"
+          type="tel"
           name="ref"
           required
         />
@@ -398,7 +400,7 @@ const menu = [
         <div
           class="flex flex-col gap-y-2 bg-white rounded-lg px-4 py-2 border border-gray-300"
         >
-          <label for="pay" class="font-semibold text-lg"
+          <label for="pay" class="font-semibold text-md md:text-lg"
             >Comprobante de pago</label
           >
           <input
@@ -412,7 +414,8 @@ const menu = [
 
         <button
           class="mx-auto bg-blue-500 text-white font-semibold px-4 py-2 rounded-md cursor-pointer disabled:bg-blue-300 disabled:cursor-not-allowed"
-          type="submit">Enviar</button
+          type="submit"
+          id="button-submit">Enviar</button
         >
 
         <a href="/audiovisual" class="w-fit underline">Volver</a>
@@ -422,9 +425,28 @@ const menu = [
 </Layout>
 
 <script>
-  const $buttonSubmit = document.querySelector("form")
-
   document.addEventListener("DOMContentLoaded", () => {
+    const $form = document.querySelector("form")
+    const $buttonSubmit = document.getElementById(
+      "button-submit",
+    ) as HTMLButtonElement
+    $form?.addEventListener("submit", async (ev) => {
+      ev.preventDefault()
+      $buttonSubmit.setAttribute("disabled", "true")
+      const formData = new FormData(ev.target as HTMLFormElement)
+      const response = await fetch("/api/masterclass", {
+        method: "POST",
+        body: formData,
+      })
+
+      $buttonSubmit.removeAttribute("disabled")
+
+      if (response.ok) {
+        location.href = "/audiovisual/gracias"
+      } else {
+        alert('Hubo un error')
+      }
+    })
     clickOtherRadioButton({
       document: document,
       query: "input[name='work']",
@@ -438,23 +460,6 @@ const menu = [
       otherId: "#other-university-input",
       wrapperId: "#other-university-input-wrapper",
     })
-  })
-
-  $buttonSubmit?.addEventListener("submit", async (ev) => {
-    ev.preventDefault()
-    $buttonSubmit.setAttribute("disabled", "true")
-    const formData = new FormData(ev.target as HTMLFormElement)
-    const response = await fetch("/api/masterclass", {
-      method: "POST",
-      body: formData,
-    })
-    const data = await response.json()
-
-    if (response.ok) {
-      location.href = "/audiovisual/gracias"
-    }
-
-    $buttonSubmit.removeAttribute("disabled")
   })
 
   function clickOtherRadioButton({

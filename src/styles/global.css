@@ -1,1 +1,10 @@
 @import "tailwindcss";
+@import "tailwind-animations";
+
+@theme {
+  --color-theme-blue: #003853;
+}
+
+body {
+  scroll-behavior: smooth;
+}
