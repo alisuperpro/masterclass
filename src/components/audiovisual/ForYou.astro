@@ -25,7 +25,7 @@ const list = [
   id="parati"
   class="px-8 bg-[url('/foryou-bg.avif')] bg-cover bg-no-repeat bg-center flex flex-col pt-8 pb-8"
 >
-  <h2 class="font-bold text-white text-3xl text-center mb-12">
+  <h2 class="font-bold text-white text-2xl md:text-3xl text-center mb-12">
     Esta Master Class es para ti si buscas
   </h2>
 
@@ -33,7 +33,7 @@ const list = [
     <ul class="grid grid-cols-1 md:grid-cols-3 gap-6 w-3/4">
       {
         list.map((el) => (
-          <li class="backdrop-blur-2xl bg-white/5 p-4 rounded-md">
+          <li class="backdrop-blur-2xl bg-white/15 p-4 rounded-md">
             <span class="text-white">{el.title}</span>
           </li>
         ))

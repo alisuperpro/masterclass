@@ -1,9 +1,9 @@
 ---
-import AwardIcon from "../../icons/AwardIcon.astro"
-import RouteIcon from "../../icons/RouteIcon.astro"
-import KeyUnlockIcon from "../../icons/KeyUnlockIcon.astro"
-import FileVideoIcon from "../../icons/FileVideoIcon.astro"
-import FileDownloadIcon from "../../icons/FileDownloadIcon.astro"
+import AwardIcon from "@/icons/AwardIcon.astro"
+import RouteIcon from "@/icons/RouteIcon.astro"
+import KeyUnlockIcon from "@/icons/KeyUnlockIcon.astro"
+import FileVideoIcon from "@/icons/FileVideoIcon.astro"
+import FileDownloadIcon from "@/icons/FileDownloadIcon.astro"
 
 const list = [
   {
@@ -44,7 +44,7 @@ const list = [
           <h2 class="font-bold text-xl md:text-3xl text-theme-blue">
             ¿Qué incluye tu inscripción?
           </h2>
-          <p class="italic text-sm md:text-md">
+          <p class="italic text-xs sm:text-sm md:text-base">
             Prepárate para aprender, practicar y llevar tus habilidades al
             siguiente nivel. Con estos recursos tendrás todo lo necesario para
             aprovechar al máximo la formación, aplicar lo aprendido de forma
@@ -52,14 +52,16 @@ const list = [
           </p>
         </div>
 
-        <span class="text-xl font-semibold">Beneficios de tu inscripción:</span>
+        <span class="text-md md:text-xl font-semibold"
+          >Beneficios de tu inscripción:</span
+        >
         <ul class="list-disc px-8 pt-4">
           {
             list.map((el) => {
               const Icon = el.icon
               return (
                 <li class="list-item">
-                  <h3 class="">{el.title}</h3>
+                  <h3 class="text-sm md:text-base">{el.title}</h3>
                 </li>
               )
             })

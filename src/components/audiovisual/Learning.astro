@@ -54,14 +54,14 @@ const list = [
     <h2 class="font-bold text-lg md:text-4xl text-theme-blue">
       ¿Qué aprenderás en esta Master Class?
     </h2>
-    <p class="md:max-w-1/2 text-center italic text-sm md:text-md">
+    <p class="md:max-w-1/2 text-center italic text-xs md:text-base md:text-md">
       En esta formación intensiva descubrirás cómo editar con criterio
       profesional, optimizando tiempo y elevando la calidad de tus videos.
     </p>
   </div>
 
   <div class="md:px-8 md:pl-20">
-    <ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <ul class="grid grid-cols-1 md:grid-cols-2 gap-x-4 md:gap-y-4">
       {
         list.map((el) => {
           const Icon = el.icon
@@ -71,8 +71,12 @@ const list = [
                 <Icon class="size-12 text-theme-blue" />{" "}
               </span>
               <div>
-                <h3 class="font-bold text-xl">{el.title}</h3>
-                <p class="text-pretty md:max-w-3/4">{el.description}</p>
+                <h3 class="font-semibold md:font-bold text-lg md:text-xl">
+                  {el.title}
+                </h3>
+                <p class="text-pretty text-xs md:text-base md:max-w-3/4">
+                  {el.description}
+                </p>
               </div>
             </li>
           )
