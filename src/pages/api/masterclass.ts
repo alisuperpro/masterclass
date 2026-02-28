@@ -132,7 +132,7 @@ export const POST: APIRoute = async ({ request }) => {
             <h3 style="margin-bottom:10px;">📍 Detalles del Evento</h3>
 
             <p style="margin:5px 0;">
-              <strong>Fecha:</strong> viernes, 6 de marzo
+              <strong>Fecha:</strong> viernes, 13 de marzo
             </p>
             <p style="margin:5px 0;">
               <strong>Hora:</strong> 1:30 p. m. - 4:00 p. m.
