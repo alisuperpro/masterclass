@@ -1,0 +1,382 @@
+---
+import AuthLayout from "@/layouts/AuthLayout.astro"
+import CheckBox from "@/components/CheckBox.astro"
+import Input from "@/components/Input.astro"
+
+const howFindUs = [
+  {
+    id: "states-ws-input",
+    label: "Estados de WhatsApp",
+    name: "how-find-us",
+  },
+  {
+    id: "group-ws-input",
+    label: "Grupos de WhatsApp",
+    name: "how-find-us",
+  },
+  {
+    id: "fb-input",
+    label: "Facebook",
+    name: "how-find-us",
+  },
+  {
+    id: "ig-findus-input",
+    label: "Instagram",
+    name: "how-find-us",
+  },
+  {
+    id: "friend-input",
+    label: "Un amigo",
+    name: "how-find-us",
+  },
+  {
+    id: "ubv-input",
+    label: "UBV",
+    name: "how-find-us",
+  },
+  {
+    id: "ig-advertising-input",
+    label: "Publicidad en Instagram",
+    name: "how-find-us",
+  },
+]
+
+const occupationStatus = [
+  {
+    id: "student-input",
+    label: "Estudiante",
+    name: "occupation-status",
+  },
+  {
+    id: "professional-input",
+    label: "Profesional",
+    name: "occupation-status",
+  },
+  {
+    id: "both-input",
+    label: "Ambos",
+    name: "occupation-status",
+  },
+  {
+    id: "other-occupation-status-input",
+    label: "Otro",
+    name: "occupation-status",
+  },
+]
+
+const university = [
+  {
+    id: "ubv-university-input",
+    label: "UBV",
+    name: "university",
+  },
+  {
+    id: "iutirla-input",
+    label: "IUTIRLA",
+    name: "university",
+  },
+  {
+    id: "unesr-input",
+    label: "UNESR",
+    name: "university",
+  },
+  {
+    id: "udo-input",
+    label: "UDO",
+    name: "university",
+  },
+  {
+    id: "ucs-input",
+    label: "UCS",
+    name: "university",
+  },
+  {
+    id: "upel-input",
+    label: "UPEL",
+    name: "university",
+  },
+  {
+    id: "iutv-input",
+    label: "IUTV",
+    name: "university",
+  },
+  {
+    id: "santiago-input",
+    label: "Santiago Mariño",
+    name: "university",
+  },
+  {
+    id: "ludovico-silva-input",
+    label: "Ludovico Silva",
+    name: "university",
+  },
+  {
+    id: "other-university-input",
+    label: "Otro",
+    name: "university",
+  },
+]
+---
+
+<AuthLayout>
+  <section class="px-8">
+    <form class="py-2 rounded-lg flex flex-col gap-y-2">
+      <Input
+        id="fullname-input"
+        label="Nombre y apellido"
+        placeholder="respuesta corta"
+        type="text"
+        name="fullname"
+        required
+      />
+
+      <Input
+        id="doc-id-input"
+        label="Número de cédula"
+        placeholder="respuesta corta"
+        type="text"
+        name="doc-id"
+        required
+      />
+
+      <Input
+        id="birthday-input"
+        label="Fecha de nacimiento"
+        placeholder="respuesta corta"
+        type="date"
+        name="birthday"
+        required
+      />
+
+      <Input
+        id="email-input"
+        label="Correo"
+        placeholder="respuesta corta"
+        type="email"
+        name="email"
+        required
+      />
+
+      <Input
+        id="phone-input"
+        label="Número de teléfono con WhatsApp"
+        placeholder="respuesta corta"
+        type="tel"
+        name="phone"
+        required
+      />
+
+      <Input
+        id="ig-input"
+        label="Instagram"
+        placeholder="respuesta corta"
+        type="text"
+        name="ig-input"
+        required
+      />
+
+      <div
+        class="flex flex-col gap-y-2 bg-white rounded-lg px-4 py-2 border border-gray-300"
+      >
+        <h2 class="font-bold text-md md:text-lg">
+          ¿Cómo se enteró de Cache Marketing?
+        </h2>
+        {
+          howFindUs.map((el) => {
+            return (
+              <CheckBox
+                id={el.id}
+                label={el.label}
+                name={el.name}
+                value={el.label}
+              />
+            )
+          })
+        }
+      </div>
+
+      <Input
+        id="disability-input"
+        label="Indique si tiene alguna patología o discapacidad"
+        placeholder="respuesta corta"
+        type="text"
+        name="disability"
+        required
+      />
+
+      <div
+        class="flex flex-col gap-y-2 bg-white rounded-lg px-4 py-2 border border-gray-300"
+      >
+        <h2 class="font-bold text-md md:text-lg">
+          Actualmente, ¿eres estudiante o profesional?
+        </h2>
+        {
+          occupationStatus.map((el) => {
+            return (
+              <CheckBox
+                id={el.id}
+                label={el.label}
+                name={el.name}
+                value={el.label}
+              />
+            )
+          })
+        }
+
+        <div class="hidden" id="other-occupation-status-input-wrapper">
+          <Input
+            id="other-occupation-status-input-text"
+            label=""
+            placeholder="respuesta corta"
+            type="text"
+            name="other-occupation-status-input-text"
+          />
+        </div>
+      </div>
+
+      <div
+        class="flex flex-col gap-y-2 bg-white rounded-lg px-4 py-2 border border-gray-300"
+      >
+        <h2 class="font-bold text-md md:text-lg">
+          ¿En qué universidad estudias o egresaste?
+        </h2>
+        {
+          university.map((el) => {
+            return (
+              <CheckBox
+                id={el.id}
+                label={el.label}
+                name={el.name}
+                value={el.label}
+              />
+            )
+          })
+        }
+
+        <div class="hidden" id="other-university-input-wrapper">
+          <Input
+            id="other-university-input-text"
+            label=""
+            placeholder="respuesta corta"
+            type="text"
+            name="other-university-input-text"
+          />
+        </div>
+      </div>
+
+      <button
+        class="mx-auto bg-blue-500 text-white font-semibold px-4 py-2 rounded-md cursor-pointer disabled:bg-blue-300 disabled:cursor-not-allowed"
+        type="submit"
+        id="button-submit">Enviar</button
+      >
+    </form>
+  </section>
+</AuthLayout>
+
+<script>
+  import { API_URL } from "@/lib/const"
+  document.addEventListener("DOMContentLoaded", async () => {
+    const res = await fetch("/api/user", {
+      method: "GET",
+    })
+
+    const json = await res.json()
+
+    const { id } = json.user
+
+    const $submit = document.querySelector("form")
+
+    $submit?.addEventListener("submit", async (ev) => {
+      ev.preventDefault()
+      const $buttonSubmit = document.getElementById(
+        "button-submit",
+      ) as HTMLButtonElement
+      $buttonSubmit.setAttribute("disabled", "true")
+      const formData = new FormData(ev.target as HTMLFormElement)
+
+      const name = formData.get("fullname")
+      const docId = formData.get("doc-id")
+      const email = formData.get("email")
+      const phone = formData.get("phone")
+      const igUsername = formData.get("ig-input")
+      const howFindUs = formData.get("how-find-us")
+      const birthday = formData.get("birthday")
+      const disability = formData.get("disability")
+      const occupationStatus = formData.get("occupation-status") ?? ""
+      const university = formData.get("university") ?? ""
+      const otherOccupationStatus =
+        formData.get("other-occupation-status-input-text") ?? ""
+      const otherUniversity = formData.get("other-university-input-text") ?? ""
+      const res = await fetch(`${API_URL}/api/user`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id,
+          fullName: name,
+          docId,
+          email,
+          phone,
+          birthday,
+          occupationStatus:
+            occupationStatus === "" ? otherOccupationStatus : occupationStatus,
+          university: university === "" ? otherUniversity : university,
+          howFindUs,
+          disability,
+          igUsername,
+        }),
+      })
+
+      $buttonSubmit.removeAttribute("disabled")
+
+      if (res.ok) {
+        location.href = "/perfil"
+      } else {
+        alert("Hubo un error")
+      }
+    })
+
+    clickOtherRadioButton({
+      document: document,
+      query: "input[name='work']",
+      otherId: "#other-occupation-status-input",
+      wrapperId: "#other-occupation-status-input-wrapper",
+    })
+
+    clickOtherRadioButton({
+      document: document,
+      query: "input[name='university']",
+      otherId: "#other-university-input",
+      wrapperId: "#other-university-input-wrapper",
+    })
+  })
+
+  function clickOtherRadioButton({
+    document,
+    query,
+    otherId,
+    wrapperId,
+  }: {
+    document: any
+    query: string
+    otherId: string
+    wrapperId: string
+  }) {
+    const $radioOtherInput = document.querySelectorAll(
+      query,
+    ) as NodeListOf<HTMLInputElement>
+
+    $radioOtherInput.forEach((el) => {
+      el.addEventListener("click", (ev) => {
+        const $other = document.querySelector(otherId) as HTMLInputElement
+        const $wrapper = document.querySelector(wrapperId)
+        if ($other.checked) {
+          $wrapper?.classList.remove("hidden")
+        } else {
+          $wrapper?.classList.add("hidden")
+        }
+      })
+    })
+  }
+</script>

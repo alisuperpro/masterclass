@@ -2,7 +2,7 @@
 export const prerenderer = true
 import CheckBox from "../../../components/CheckBox.astro"
 import Banner from "../../../components/Banner.astro"
-import Layout from "../../../layouts/Layout.astro"
+import AuthLayout from "../../../layouts/AuthLayout.astro"
 import Input from "../../../components/Input.astro"
 
 const findUs = [
@@ -43,95 +43,6 @@ const findUs = [
   },
 ]
 
-const underAge = [
-  {
-    id: "under-age-true-input",
-    label: "Sí",
-    name: "under-age",
-  },
-  {
-    id: "under-age-false-input",
-    label: "No",
-    name: "under-age",
-  },
-]
-
-const work = [
-  {
-    id: "student-input",
-    label: "Estudiante",
-    name: "work",
-  },
-  {
-    id: "professional-input",
-    label: "Profesional",
-    name: "work",
-  },
-  {
-    id: "both-input",
-    label: "Ambos",
-    name: "work",
-  },
-  {
-    id: "other-work-input",
-    label: "Otro",
-    name: "work",
-  },
-]
-
-const university = [
-  {
-    id: "ubv-university-input",
-    label: "UBV",
-    name: "university",
-  },
-  {
-    id: "iutirla-input",
-    label: "IUTIRLA",
-    name: "university",
-  },
-  {
-    id: "unesr-input",
-    label: "UNESR",
-    name: "university",
-  },
-  {
-    id: "udo-input",
-    label: "UDO",
-    name: "university",
-  },
-  {
-    id: "ucs-input",
-    label: "UCS",
-    name: "university",
-  },
-  {
-    id: "upel-input",
-    label: "UPEL",
-    name: "university",
-  },
-  {
-    id: "iutv-input",
-    label: "IUTV",
-    name: "university",
-  },
-  {
-    id: "santiago-input",
-    label: "Santiago Mariño",
-    name: "university",
-  },
-  {
-    id: "ludovico-silva-input",
-    label: "Ludovico Silva",
-    name: "university",
-  },
-  {
-    id: "other-university-input",
-    label: "Otro",
-    name: "university",
-  },
-]
-
 const experience = [
   {
     id: "exp-false-input",
@@ -154,87 +65,16 @@ const experience = [
     name: "experience",
   },
 ]
-
-const menu = [
-  {
-    id: "menu-a",
-    label: "Asado negro con arroz y ensalada rallada",
-    name: "menu",
-    value: "Asado negro",
-  },
-  {
-    id: "menu-b",
-    label: "Pollo a la plancha con puré y ensalada rallada",
-    name: "menu",
-    value: "Pollo a la plancha",
-  },
-  {
-    id: "menu-c",
-    label: "Pasta boloñesa con plátano y pan",
-    name: "menu",
-    value: "Pasta boloñesa",
-  },
-  {
-    id: "menu-d",
-    label:
-      "Hamburguesa clásica: carne salsas tradicionales, vegetales y queso con ración de papas fritas",
-    name: "menu",
-    value: "Hamburguesa",
-  },
-]
 ---
 
-<Layout title="Cache Marketing | Master Class Edición Audiovisual | Formulario">
+<AuthLayout
+  title="Cache Marketing | Master Class Edición Audiovisual | Formulario"
+>
   <section class="py-2 bg-gray-100 pb-8 px-8 md:px-0">
     <div class="md:max-w-2xl mx-auto my-0">
       <Banner />
 
       <form class="py-2 rounded-lg flex flex-col gap-y-2">
-        <Input
-          id="fullname-input"
-          label="Nombre y apellido"
-          placeholder="respuesta corta"
-          type="text"
-          name="fullname"
-          required
-        />
-
-        <Input
-          id="dni-input"
-          label="Número de cédula"
-          placeholder="respuesta corta"
-          type="text"
-          name="dni"
-          required
-        />
-
-        <Input
-          id="email-input"
-          label="Correo"
-          placeholder="respuesta corta"
-          type="email"
-          name="email"
-          required
-        />
-
-        <Input
-          id="phone-input"
-          label="Número de teléfono con WhatsApp"
-          placeholder="respuesta corta"
-          type="tel"
-          name="phone"
-          required
-        />
-
-        <Input
-          id="ig-input"
-          label="Instagram"
-          placeholder="respuesta corta"
-          type="text"
-          name="ig-input"
-          required
-        />
-
         <div
           class="flex flex-col gap-y-2 bg-white rounded-lg px-4 py-2 border border-gray-300"
         >
@@ -258,93 +98,6 @@ const menu = [
         <div
           class="flex flex-col gap-y-2 bg-white rounded-lg px-4 py-2 border border-gray-300"
         >
-          <h2 class="font-bold text-md md:text-lg">¿Menor de edad?</h2>
-          {
-            underAge.map((el) => {
-              return (
-                <CheckBox
-                  id={el.id}
-                  label={el.label}
-                  name={el.name}
-                  value={el.label}
-                />
-              )
-            })
-          }
-        </div>
-
-        <Input
-          id="disability-input"
-          label="Indique si tiene alguna patología o discapacidad"
-          placeholder="respuesta corta"
-          type="text"
-          name="disability"
-          required
-        />
-
-        <div
-          class="flex flex-col gap-y-2 bg-white rounded-lg px-4 py-2 border border-gray-300"
-        >
-          <h2 class="font-bold text-md md:text-lg">
-            Actualmente, ¿eres estudiante o profesional?
-          </h2>
-          {
-            work.map((el) => {
-              return (
-                <CheckBox
-                  id={el.id}
-                  label={el.label}
-                  name={el.name}
-                  value={el.label}
-                />
-              )
-            })
-          }
-
-          <div class="hidden" id="other-work-input-wrapper">
-            <Input
-              id="other-work-input-text"
-              label=""
-              placeholder="respuesta corta"
-              type="text"
-              name="other-work-input-text"
-            />
-          </div>
-        </div>
-
-        <div
-          class="flex flex-col gap-y-2 bg-white rounded-lg px-4 py-2 border border-gray-300"
-        >
-          <h2 class="font-bold text-md md:text-lg">
-            ¿En qué universidad estudias o egresaste?
-          </h2>
-          {
-            university.map((el) => {
-              return (
-                <CheckBox
-                  id={el.id}
-                  label={el.label}
-                  name={el.name}
-                  value={el.label}
-                />
-              )
-            })
-          }
-
-          <div class="hidden" id="other-university-input-wrapper">
-            <Input
-              id="other-university-input-text"
-              label=""
-              placeholder="respuesta corta"
-              type="text"
-              name="other-university-input-text"
-            />
-          </div>
-        </div>
-
-        <div
-          class="flex flex-col gap-y-2 bg-white rounded-lg px-4 py-2 border border-gray-300"
-        >
           <h2 class="font-bold text-md md:text-lg">
             ¿Tienes experiencia en el área audiovisual?
           </h2>
@@ -361,28 +114,6 @@ const menu = [
             })
           }
         </div>
-
-        <!--  <div
-          class="flex flex-col gap-y-2 bg-white rounded-lg px-4 py-2 border border-gray-300"
-        >
-          <h2 class="font-bold text-md md:text-lg">
-            Menu <span class="font-semibold text-sm text-gray-600"
-              >(Todos las opciones incluyen bebida)</span
-            >
-          </h2>
-          {
-            menu.map((el) => {
-              return (
-                <CheckBox
-                  id={el.id}
-                  label={el.label}
-                  name={el.name}
-                  value={el.value}
-                />
-              )
-            })
-          }
-        </div> -->
 
         <div class="bg-white px-4 py-2 rounded-lg">
           <h2 class="font-bold text-md md:text-lg">Datos de pago</h2>
@@ -424,9 +155,10 @@ const menu = [
       </form>
     </div>
   </section>
-</Layout>
+</AuthLayout>
 
 <script>
+  import { API_URL } from "@/lib/const"
   document.addEventListener("DOMContentLoaded", () => {
     const $form = document.querySelector("form")
     const $buttonSubmit = document.getElementById(
@@ -436,10 +168,62 @@ const menu = [
       ev.preventDefault()
       $buttonSubmit.setAttribute("disabled", "true")
       const formData = new FormData(ev.target as HTMLFormElement)
-      const response = await fetch("/api/masterclass", {
-        method: "POST",
-        body: formData,
+
+      const howFind = formData.get("find-us")
+      const experience = formData.get("experience")
+      const payRef = formData.get("ref")
+      const payImg = formData.get("pay") as File
+
+      const res = await fetch("/api/user", {
+        method: "GET",
       })
+
+      const json = await res.json()
+
+      const { id } = json.user
+      const { token } = json
+
+      const splitted = payImg?.name?.split(".")[1]
+      const rename = `${id}-70a7a519-405c-4a48-8b77-e9c420a23d1b.${splitted}`
+
+      const newForm = new FormData(ev.target as HTMLFormElement)
+
+      newForm.append("img_name", rename)
+
+      const response = await fetch(`${API_URL}/api/training-user/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+          "Access-Control-Allow-Headers": "*",
+          mode: "cors",
+        },
+        body: JSON.stringify({
+          trainingId: "70a7a519-405c-4a48-8b77-e9c420a23d1b",
+          userId: id,
+          howFind,
+          experience,
+          additionalInfo: null,
+          payRef,
+          payImg: rename,
+        }),
+      })
+
+      if (response.status === 403) {
+        alert("Usuario ya registrado")
+        location.href = "/perfil"
+        return
+      }
+
+      const uploadImg = await fetch("/api/masterclass", {
+        method: "POST",
+        body: newForm,
+      })
+
+      if (!uploadImg.ok) {
+        alert("Error al guardar el comprobante")
+        return
+      }
 
       $buttonSubmit.removeAttribute("disabled")
 
@@ -449,46 +233,33 @@ const menu = [
         alert("Hubo un error")
       }
     })
-    clickOtherRadioButton({
-      document: document,
-      query: "input[name='work']",
-      otherId: "#other-work-input",
-      wrapperId: "#other-work-input-wrapper",
-    })
-
-    clickOtherRadioButton({
-      document: document,
-      query: "input[name='university']",
-      otherId: "#other-university-input",
-      wrapperId: "#other-university-input-wrapper",
-    })
   })
+</script>
 
-  function clickOtherRadioButton({
-    document,
-    query,
-    otherId,
-    wrapperId,
-  }: {
-    document: any
-    query: string
-    otherId: string
-    wrapperId: string
-  }) {
-    const $radioOtherInput = document.querySelectorAll(
-      query,
-    ) as NodeListOf<HTMLInputElement>
+<script>
+  import { API_URL } from "@/lib/const"
 
-    $radioOtherInput.forEach((el) => {
-      el.addEventListener("click", (ev) => {
-        const $other = document.querySelector(otherId) as HTMLInputElement
-        const $wrapper = document.querySelector(wrapperId)
-        if ($other.checked) {
-          $wrapper?.classList.remove("hidden")
-        } else {
-          $wrapper?.classList.add("hidden")
-        }
-      })
+  document.addEventListener("DOMContentLoaded", async () => {
+    const res = await fetch("/api/user", {
+      method: "GET",
     })
-  }
+
+    const json = await res.json()
+
+    const { id } = json.user
+    const { token } = json
+    const userFetch = await fetch(`${API_URL}/api/user/me/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+        "Access-Control-Allow-Headers": "*",
+        mode: "cors",
+      },
+    })
+
+    if (userFetch.status === 404) {
+      location.href = "/informacion-adicional"
+    }
+  })
 </script>
