@@ -1,3 +1,4 @@
+import { API_URL } from "@/lib/const"
 import { clerkClient } from "@clerk/astro/server"
 import type { APIRoute } from "astro"
 
@@ -54,7 +55,7 @@ export const POST: APIRoute = async ({ request }) => {
     )
   }
 
-  const res = await fetch("http://localhost:3500/api/user", {
+  const res = await fetch(`${API_URL}/api/user`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
