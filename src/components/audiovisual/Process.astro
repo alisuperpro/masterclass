@@ -3,6 +3,7 @@ import WpFormsIcon from "@/icons/WpFormsIcon.astro"
 import CreditCardIcon from "@/icons/CreditCardIcon.astro"
 import ReceiptIcon from "@/icons/ReceiptIcon.astro"
 import EmailCheckIcon from "@/icons/EmailCheckIcon.astro"
+import { SignUpButton } from "@clerk/astro/components"
 
 const list = [
   {
@@ -85,6 +86,17 @@ const list = [
         class="text-white bg-theme-blue rounded-full px-8 py-4 font-semibold"
         >Quiero participar</a
       >
+      <SignUpButton
+        mode="modal"
+        fallbackRedirectUrl="/informacion-adicional"
+        title={"Quiero participar"}
+        asChild
+      >
+        <span
+          class="text-white bg-theme-blue rounded-full px-8 py-4 font-semibold cursor-pointer"
+          >Asegura tu cupon hoy mismo</span
+        >
+      </SignUpButton>
     </div>
   </div>
 </section>

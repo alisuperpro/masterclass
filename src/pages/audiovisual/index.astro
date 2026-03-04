@@ -14,12 +14,20 @@ import LimitedTickets from "@/components/audiovisual/LimitedTickets.astro"
 import FaQ from "@/components/audiovisual/FaQ.astro"
 import Process from "@/components/audiovisual/Process.astro"
 import Footer from "@/components/audiovisual/Footer.astro"
+import {
+  SignedIn,
+  SignedOut,
+  SignUpButton,
+  UserButton,
+} from "@clerk/astro/components"
 ---
 
 <Layout title="Cache Marketing | Master Class Edición Audiovisual">
-  <section class="bg-[url('/hero-bg.avif')] bg-cover bg-center h-screen">
+  <section
+    class="bg-[url('/hero-bg.avif')] bg-cover bg-center h-dvh md:h-screen"
+  >
     <div class="bg-black/60 h-full text-white flex justify-between flex-col">
-      <nav class="w-full grid grid-cols-1 md:grid-cols-4 gap-y-6 pt-4">
+      <nav class="w-full grid grid-cols-2 md:grid-cols-4 gap-y-6 pt-4">
         <div class="flex justify-center items-center">
           <CMlogo class="w-24 md:w-28" />
         </div>
@@ -42,12 +50,30 @@ import Footer from "@/components/audiovisual/Footer.astro"
             >Ubicación</a
           >
         </div>
-        <div class="flex flex-row justify-center items-end mb-1">
-          <a
-            href="/audiovisual/formulario"
-            class="text-white text-sm md:text-md hover:bg-theme-blue hover:border-theme-blue transition-colors border-2 border-white rounded-full px-4 py-2 font-semibold"
-            >Quiero participar</a
-          >
+        <div class="flex flex-row justify-center items-center px-4 py-4">
+          <div>
+            <SignedOut>
+              <div class="flex flex-row justify-center items-end mb-1">
+                <SignUpButton
+                  mode="modal"
+                  fallbackRedirectUrl="/informacion-adicional"
+                  title={"Quiero participar"}
+                  asChild
+                >
+                  <span
+                    class="text-white text-sm md:text-md hover:bg-theme-blue hover:border-theme-blue transition-colors border-2 border-white rounded-full px-4 py-2 font-semibold cursor-pointer"
+                    >Quiero participar</span
+                  >
+                </SignUpButton>
+              </div>
+            </SignedOut>
+            <SignedIn>
+              <div class="flex flex-row justify-center items-center gap-x-4">
+                <a href="/perfil">Ver Perfil</a>
+                <UserButton />
+              </div>
+            </SignedIn>
+          </div>
         </div>
       </nav>
 
