@@ -3,7 +3,7 @@ import WpFormsIcon from "@/icons/WpFormsIcon.astro"
 import CreditCardIcon from "@/icons/CreditCardIcon.astro"
 import ReceiptIcon from "@/icons/ReceiptIcon.astro"
 import EmailCheckIcon from "@/icons/EmailCheckIcon.astro"
-import { SignUpButton } from "@clerk/astro/components"
+import { SignedIn, SignedOut, SignUpButton } from "@clerk/astro/components"
 
 const list = [
   {
@@ -81,22 +81,29 @@ const list = [
       </ul>
     </div>
     <div class="flex flex-row justify-center items-end mb-1 mt-8">
-      <a
-        href="/audiovisual/formulario"
-        class="text-white bg-theme-blue rounded-full px-8 py-4 font-semibold"
-        >Quiero participar</a
-      >
-      <SignUpButton
-        mode="modal"
-        fallbackRedirectUrl="/informacion-adicional"
-        title={"Quiero participar"}
-        asChild
-      >
-        <span
-          class="text-white bg-theme-blue rounded-full px-8 py-4 font-semibold cursor-pointer"
-          >Asegura tu cupon hoy mismo</span
+      <SignedIn>
+        <div class="flex flex-row justify-center items-center gap-x-4">
+          <a
+            href="/audiovisual/formulario"
+            class="text-white bg-theme-blue rounded-full px-8 py-4 font-semibold cursor-pointer"
+          >
+            Quiero participar</a
+          >
+        </div>
+      </SignedIn>
+      <SignedOut>
+        <SignUpButton
+          mode="modal"
+          fallbackRedirectUrl="/informacion-adicional"
+          title={"Quiero participar"}
+          asChild
         >
-      </SignUpButton>
+          <span
+            class="text-white bg-theme-blue rounded-full px-8 py-4 font-semibold cursor-pointer"
+            >Quiero participar</span
+          >
+        </SignUpButton>
+      </SignedOut>
     </div>
   </div>
 </section>

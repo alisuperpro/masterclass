@@ -2,7 +2,7 @@
 import LocationDotIcon from "@/icons/LocationDotIcon.astro"
 import CalendarIcon from "@/icons/CalendarIcon.astro"
 import ClockIcon from "@/icons/ClockIcon.astro"
-import { SignUpButton } from "@clerk/astro/components"
+import { SignedIn, SignedOut, SignUpButton } from "@clerk/astro/components"
 ---
 
 <section id="ubicacion" class="bg-gray-200 py-12 px-8">
@@ -36,16 +36,28 @@ import { SignUpButton } from "@clerk/astro/components"
       rel="noopener noreferrer"
       target="_blank">Ver ubicación</a
     >
-    <SignUpButton
-      mode="modal"
-      fallbackRedirectUrl="/informacion-adicional"
-      title={"Quiero participar"}
-      asChild
-    >
-      <span
-        class="text-white bg-theme-blue rounded-full px-8 py-4 font-semibold cursor-pointer"
-        >Quiero participar</span
+    <SignedIn>
+      <div class="flex flex-row justify-center items-center gap-x-4">
+        <a
+          href="/audiovisual/formulario"
+          class="text-white bg-theme-blue rounded-full px-8 py-4 font-semibold cursor-pointer"
+        >
+          Quiero participar</a
+        >
+      </div>
+    </SignedIn>
+    <SignedOut>
+      <SignUpButton
+        mode="modal"
+        fallbackRedirectUrl="/informacion-adicional"
+        title={"Quiero participar"}
+        asChild
       >
-    </SignUpButton>
+        <span
+          class="text-white bg-theme-blue rounded-full px-8 py-4 font-semibold cursor-pointer"
+          >Quiero participar</span
+        >
+      </SignUpButton>
+    </SignedOut>
   </div>
 </section>

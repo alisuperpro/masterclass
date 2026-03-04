@@ -1,5 +1,5 @@
 ---
-import { SignUpButton } from "@clerk/astro/components"
+import { SignedIn, SignedOut, SignUpButton } from "@clerk/astro/components"
 ---
 
 <section
@@ -30,16 +30,28 @@ import { SignUpButton } from "@clerk/astro/components"
   </div>
 
   <div class="flex justify-center items-center">
-    <SignUpButton
-      mode="modal"
-      fallbackRedirectUrl="/informacion-adicional"
-      title={"Quiero participar"}
-      asChild
-    >
-      <span
-        class="text-white hover:bg-theme-blue hover:border-theme-blue transition-colors border-2 border-white rounded-full md:px-8 md:py-4 px-6 py-4 font-semibold"
-        >Asegura tu cupon hoy mismo</span
+    <SignedIn>
+      <div class="flex flex-row justify-center items-center gap-x-4">
+        <a
+          href="/audiovisual/formulario"
+          class="text-white hover:bg-theme-blue hover:border-theme-blue transition-colors border-2 border-white rounded-full md:px-8 md:py-4 px-6 py-4 font-semibold"
+        >
+          Asegura tu cupo hoy mismo</a
+        >
+      </div>
+    </SignedIn>
+    <SignedOut>
+      <SignUpButton
+        mode="modal"
+        fallbackRedirectUrl="/informacion-adicional"
+        title={"Quiero participar"}
+        asChild
       >
-    </SignUpButton>
+        <span
+          class="text-white hover:bg-theme-blue hover:border-theme-blue transition-colors border-2 border-white rounded-full md:px-8 md:py-4 px-6 py-4 font-semibold cursor-pointer"
+          >Asegura tu cupo hoy mismo</span
+        >
+      </SignUpButton>
+    </SignedOut>
   </div>
 </section>

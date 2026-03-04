@@ -4,7 +4,7 @@ import RouteIcon from "@/icons/RouteIcon.astro"
 import KeyUnlockIcon from "@/icons/KeyUnlockIcon.astro"
 import FileVideoIcon from "@/icons/FileVideoIcon.astro"
 import FileDownloadIcon from "@/icons/FileDownloadIcon.astro"
-import { SignUpButton } from "@clerk/astro/components"
+import { SignedIn, SignedOut, SignUpButton } from "@clerk/astro/components"
 
 const list = [
   {
@@ -59,7 +59,6 @@ const list = [
         <ul class="list-disc px-8 pt-4">
           {
             list.map((el) => {
-              const Icon = el.icon
               return (
                 <li class="list-item">
                   <h3 class="text-sm md:text-base">{el.title}</h3>
@@ -71,17 +70,27 @@ const list = [
       </div>
 
       <div class="hidden md:block">
-        <SignUpButton
-          mode="modal"
-          fallbackRedirectUrl="/informacion-adicional"
-          title={"Quiero participar"}
-          asChild
-        >
-          <span
+        <SignedIn>
+          <a
+            href="/audiovisual/formulario"
             class="text-white bg-theme-blue rounded-full px-8 py-4 font-semibold cursor-pointer"
-            >Quiero participar</span
           >
-        </SignUpButton>
+            Quiero participar</a
+          >
+        </SignedIn>
+        <SignedOut>
+          <SignUpButton
+            mode="modal"
+            fallbackRedirectUrl="/informacion-adicional"
+            title={"Quiero participar"}
+            asChild
+          >
+            <span
+              class="text-white bg-theme-blue rounded-full px-8 py-4 font-semibold cursor-pointer"
+              >Quiero participar</span
+            >
+          </SignUpButton>
+        </SignedOut>
       </div>
     </div>
     <div class="flex justify-center items-center">
@@ -93,17 +102,27 @@ const list = [
       />
     </div>
     <div class="md:hidden visible mt-8 flex justify-center items-center">
-      <SignUpButton
-        mode="modal"
-        fallbackRedirectUrl="/informacion-adicional"
-        title={"Quiero participar"}
-        asChild
-      >
-        <span
+      <SignedIn>
+        <a
+          href="/audiovisual/formulario"
           class="text-white bg-theme-blue rounded-full px-8 py-4 font-semibold cursor-pointer"
-          >Quiero participar</span
         >
-      </SignUpButton>
+          Quiero participar</a
+        >
+      </SignedIn>
+      <SignedOut>
+        <SignUpButton
+          mode="modal"
+          fallbackRedirectUrl="/informacion-adicional"
+          title={"Quiero participar"}
+          asChild
+        >
+          <span
+            class="text-white bg-theme-blue rounded-full px-8 py-4 font-semibold cursor-pointer"
+            >Quiero participar</span
+          >
+        </SignUpButton>
+      </SignedOut>
     </div>
   </div>
 </section>
