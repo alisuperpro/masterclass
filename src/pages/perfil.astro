@@ -43,10 +43,6 @@ import AuthLayout from "@/layouts/AuthLayout.astro"
       },
     })
 
-    if (userFetch.status === 404) {
-      location.href = "/informacion-adicional"
-    }
-
     const userData = await userFetch.json()
 
     const user = userData.data

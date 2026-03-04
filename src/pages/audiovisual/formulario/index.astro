@@ -234,31 +234,3 @@ const experience = [
     })
   })
 </script>
-
-<script>
-  import { API_URL } from "@/lib/const"
-
-  document.addEventListener("DOMContentLoaded", async () => {
-    const res = await fetch("/api/user", {
-      method: "GET",
-    })
-
-    const json = await res.json()
-
-    const { id } = json.user
-    const { token } = json
-    const userFetch = await fetch(`${API_URL}/api/user/me/${id}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-        "Access-Control-Allow-Headers": "*",
-        mode: "cors",
-      },
-    })
-
-    if (userFetch.status === 404) {
-      location.href = "/informacion-adicional"
-    }
-  })
-</script>
