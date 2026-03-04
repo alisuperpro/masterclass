@@ -321,8 +321,10 @@ const university = [
           phone,
           birthday,
           occupationStatus:
-            occupationStatus === "" ? otherOccupationStatus : occupationStatus,
-          university: university === "" ? otherUniversity : university,
+            occupationStatus === "Otro"
+              ? otherOccupationStatus
+              : occupationStatus,
+          university: university === "Otro" ? otherUniversity : university,
           howFindUs,
           disability,
           igUsername,
