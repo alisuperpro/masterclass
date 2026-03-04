@@ -8,15 +8,17 @@ const isProtectedRoute = createRouteMatcher([
 ])
 
 const isInfoAdditionalRoute = createRouteMatcher(["/informacion-adicional(.*)"])
-const isProfileRoute = createRouteMatcher(["/perfil(.*)"])
 
 export const onRequest = clerkMiddleware(async (auth, context, next) => {
   const { isAuthenticated, redirectToSignIn, userId, getToken } = auth()
+  const url = new URL(context.request.url)
 
+  // Si no está autenticado y es ruta protegida, redirigir al login
   if (!isAuthenticated && isProtectedRoute(context.request)) {
     return redirectToSignIn()
   }
 
+  // Si está autenticado y es ruta protegida (excluyendo info-adicional)
   if (
     userId &&
     isProtectedRoute(context.request) &&
@@ -26,18 +28,20 @@ export const onRequest = clerkMiddleware(async (auth, context, next) => {
       const token = await getToken()
       const result = await verifyUserData({ userId, token })
 
+      // Si el usuario no tiene información (404), redirigir a info-adicional
+      // guardando la URL original como parámetro
       if (result.res.status === 404) {
-        return context.redirect("/informacion-adicional")
+        const redirectUrl = `/informacion-adicional?redirect=${encodeURIComponent(url.pathname)}`
+        return context.redirect(redirectUrl)
       }
 
       return next()
     } catch (error) {
       console.error("Error verificando usuario:", error)
-      return next() // En caso de error, continuar (o podrías mostrar una página de error)
+      return next()
     }
   }
 
-  // Para cualquier otro caso, continuar
   return next()
 })
 

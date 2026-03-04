@@ -334,7 +334,9 @@ const university = [
       $buttonSubmit.removeAttribute("disabled")
 
       if (res.ok) {
-        location.href = "/perfil"
+        const urlParams = new URLSearchParams(window.location.search)
+        const redirectUrl = urlParams.get("redirect") || "/perfil"
+        location.href = redirectUrl
       } else {
         alert("Hubo un error")
       }
