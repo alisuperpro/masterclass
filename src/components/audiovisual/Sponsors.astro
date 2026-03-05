@@ -52,14 +52,22 @@ const SPONSORS = [
     class: "w-28 md:w-40",
     contact: "https://www.instagram.com/od.mariogarcia",
   },
+  {
+    name: "hotel-tibisay",
+    img: "/sponsors/tibisay.avif",
+    class: "w-16 md:w-24",
+    contact: "https://www.instagram.com/tibisayhotelmaturin",
+  },
 ]
 ---
 
-<div class="grid md:grid-cols-8 grid-cols-2 gap-x-4 px-8 pb-4 md:pb-0">
+<div
+  class="grid md:grid-cols-9 grid-cols-3 gap-x-2 gap-y-2 md:gap-x-4 px-4 md:px-8 pb-4 md:pb-0"
+>
   {
     SPONSORS.map((el) => (
       <div class="flex justify-center items-center sponsors">
-        <a href={el.contact} rel="noopener noreferrer">
+        <a href={el.contact} rel="noopener noreferrer" target="_blank">
           <img
             src={el.img}
             alt={"Cache marketing Patrocinadores"}
