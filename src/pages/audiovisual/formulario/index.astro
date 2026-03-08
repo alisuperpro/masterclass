@@ -159,44 +159,63 @@ const experience = [
 
 <script>
   import { API_URL } from "@/lib/const"
+
   document.addEventListener("DOMContentLoaded", () => {
     const $form = document.querySelector("form")
     const $buttonSubmit = document.getElementById(
       "button-submit",
     ) as HTMLButtonElement
+
     $form?.addEventListener("submit", async (ev) => {
       ev.preventDefault()
       $buttonSubmit.setAttribute("disabled", "true")
-      const formData = new FormData(ev.target as HTMLFormElement)
 
-      const howFind = formData.get("find-us")
-      const experience = formData.get("experience")
-      const payRef = formData.get("ref")
-      const payImg = formData.get("pay") as File
+      const originalFormData = new FormData(ev.target as HTMLFormElement)
 
-      const res = await fetch("/api/user", {
-        method: "GET",
-      })
+      const howFind = originalFormData.get("find-us")
+      const experience = originalFormData.get("experience")
+      const payRef = originalFormData.get("ref")
+      const payImg = originalFormData.get("pay") as File
 
+      if (!payImg || payImg.size === 0) {
+        alert("Por favor selecciona un comprobante de pago")
+        $buttonSubmit.removeAttribute("disabled")
+        return
+      }
+
+      const res = await fetch("/api/user", { method: "GET" })
       const json = await res.json()
-
       const { id } = json.user
       const { token } = json
 
-      const splitted = payImg?.name?.split(".")[1]
-      const rename = `${id}-70a7a519-405c-4a48-8b77-e9c420a23d1b.${splitted}`
+      const extension = payImg.name.split(".").pop()
+      const newFileName = `${id}-70a7a519-405c-4a48-8b77-e9c420a23d1b.${extension}`
 
-      const newForm = new FormData(ev.target as HTMLFormElement)
+      const modifiedFile = new File([payImg], newFileName, {
+        type: payImg.type,
+      })
 
-      newForm.append("img_name", rename)
+      const fileFormData = new FormData()
+      fileFormData.append("pay-img", modifiedFile)
+
+      const uploadImg = await fetch(`${API_URL}/api/training-user/upload-pay`, {
+        method: "POST",
+        body: fileFormData,
+      })
+
+      if (!uploadImg.ok) {
+        alert("Error al guardar el comprobante")
+        $buttonSubmit.removeAttribute("disabled")
+        return
+      }
+
+      const imgData = await uploadImg.json()
 
       const response = await fetch(`${API_URL}/api/training-user/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
-          "Access-Control-Allow-Headers": "*",
-          mode: "cors",
         },
         body: JSON.stringify({
           trainingId: "70a7a519-405c-4a48-8b77-e9c420a23d1b",
@@ -205,7 +224,7 @@ const experience = [
           experience,
           additionalInfo: null,
           payRef,
-          payImg: `https://masterclass-mu.vercel.app/api/pay-img/?file=${rename}`,
+          payImg: imgData.path,
         }),
       })
 
@@ -215,22 +234,15 @@ const experience = [
         return
       }
 
-      const uploadImg = await fetch("/api/masterclass", {
-        method: "POST",
-        body: newForm,
-      })
-
-      if (!uploadImg.ok) {
-        alert("Error al guardar el comprobante")
-        return
-      }
-      $buttonSubmit.removeAttribute("disabled")
-
       if (response.ok) {
         location.href = "/audiovisual/gracias"
       } else {
-        alert("Hubo un error")
+        const errorText = await response.text()
+        console.error("Error al crear registro:", errorText)
+        alert("Hubo un error al procesar tu solicitud")
       }
+
+      $buttonSubmit.removeAttribute("disabled")
     })
   })
 </script>
