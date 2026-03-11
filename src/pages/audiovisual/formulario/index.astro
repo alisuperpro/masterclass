@@ -200,6 +200,9 @@ const experience = [
 
       const uploadImg = await fetch(`${API_URL}/api/training-user/upload-pay`, {
         method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
         body: fileFormData,
       })
 

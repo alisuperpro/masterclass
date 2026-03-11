@@ -307,7 +307,7 @@ const university = [
       const otherOccupationStatus =
         formData.get("other-occupation-status-input-text") ?? ""
       const otherUniversity = formData.get("other-university-input-text") ?? ""
-      console.log(API_URL)
+
       const res = await fetch(`${API_URL}/api/user`, {
         method: "POST",
         headers: {
